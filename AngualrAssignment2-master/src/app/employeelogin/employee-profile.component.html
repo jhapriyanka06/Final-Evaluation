@@ -1,0 +1,25 @@
+<div class="card">
+
+  <nav class="navbar navbar-expand navbar-light bg-light">
+    <a class="navbar-brand">{{pageTitle}}</a>
+    <ul class="navbar-nav">
+      <li style="float:right" class="nav-item" [routerLinkActive]="['link-active']">
+        <a class="nav-link">Profile</a>
+      </li>
+      <li style="float:right" class="nav-item" [routerLinkActive]="['link-active']">
+        <a class="nav-link">Leave</a>
+      </li>
+      <li style="float:right" class="nav-item" [routerLinkActive]="['link-active']">
+        <a class="nav-link" [routerLink]="['/employeelogin']">Back</a>
+      </li>
+
+    </ul>
+
+  </nav>
+  <div class="card-body">
+    <label>Employee Name: Priyanka Jha</label>
+    <label>Email Id: jha68974@gmail.com</label>
+    <label>Date Of Joining: 12-03-2020</label>
+    <label>Date Of Birth: 06-01-1998</label>
+    </div>
+  </div>

@@ -1,0 +1,42 @@
+<div class="card">
+
+  <nav class="navbar navbar-expand navbar-light bg-light">
+    <a class="navbar-brand">{{pageTitle}}</a>
+    <ul class="navbar-nav">
+
+      <li class="nav-item" [routerLinkActive]="['link-active']">
+        <a class="nav-link" [routerLink]="['/LeaveConfiguration',0,'edit']">Back</a>
+      </li>
+
+    </ul>
+  </nav>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table mb-0">
+        <thead>
+          <tr>
+            <th>Leave Name</th>
+            <th>Number Of Days</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let le of leave">
+            <td>{{le.leavename}}</td>
+            <td>{{le.maximumleavesallowed}}</td>
+             <td>
+              <button class="btn btn-primary" [routerLink]="['/LeaveConfiguration',le.id,'edit']">Edit</button>
+            </td>
+            <td>
+            <button class="btn btn-danger" (click)="DeleteLeave(le.id)">Delete</button>
+          </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td><button class="btn btn-primary" [routerLink]="['/LeaveConfiguration',0,'edit']">Add Leave</button></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
