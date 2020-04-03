@@ -2,11 +2,12 @@
   <a class="navbar-brand">{{pageTitle}}</a>
 </nav>
 <div class="container">
-  <form #form="ngForm" autocomplete="off" ngNativevalidate>
+  <form #form="ngForm" autocomplete="off"  ngNativevalidate>
+
     <label>EMAIL ID:</label><br />
-    <input type="text" class="form-control" placeholder="User Email-Id" name="name" [(ngModel)]="employee.name" required/><br /><br />
+    <input type="text" class="form-control" placeholder="User Email-Id" id="email" name="email" ngModel pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required/><br /><br />
     <label>PASSWORD:</label><br />
     <input type="password" class="form-control" placeholder="Password" name="pwd" /><br /><br />
-    <button type="submit" class="btn btn-success btn-block" [routerLink]="['/employeeadd',0,'edit']" [disabled]="form.invalid" >LogIn</button>
+    <button type="submit" class="btn btn-success btn-block" [routerLink]="['/employee',form.value.email]" [disabled]="form.invalid" >LogIn</button>
   </form>
 </div>

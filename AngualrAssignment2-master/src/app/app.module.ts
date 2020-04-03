@@ -12,11 +12,13 @@ import { EmployeeComponent } from './employee/employee.component';
 import { EmployeeDetailsComponent } from './employee/employee-details.component';
 import { LeaveConfigComponent } from './LeaveConfiguration/leave-config.component';
 import { LeaveListComponent } from './LeaveConfiguration/leave-list.component';
+import { EmployeeLoginComponent } from './employeelogin/employee-login.component';
+import { EmployeeProfileComponent } from './employeelogin/employee-profile.component';
 
 //providers
 import { EmployeeService } from './shared/employee.service';
 import { LeaveService } from './shared/leave.service';
-import { EmployeeLoginComponent } from './employeelogin/employee-login.component';
+
 
 
 
@@ -35,7 +37,8 @@ import { EmployeeLoginComponent } from './employeelogin/employee-login.component
    EmployeeDetailsComponent,
    LeaveConfigComponent,
    LeaveListComponent,
-   EmployeeLoginComponent
+   EmployeeLoginComponent,
+   EmployeeProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ import { EmployeeLoginComponent } from './employeelogin/employee-login.component
      {path:'LeaveConfiguration/:id/edit', component:LeaveConfigComponent},
      {path:'LeaveListComponent', component:LeaveListComponent},
      {path:'employeelogin', component:EmployeeLoginComponent},
+     {path:'employee/:email', component:EmployeeProfileComponent},
      {path:'', redirectTo:'welcome', pathMatch:'full'}
    ])
   ],

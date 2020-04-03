@@ -12,6 +12,20 @@ export class EmployeeDetailsComponent implements OnInit{
 public pageTitle="Employee Details";
 employeedetails:Employee[]=[];
 employee:Employee[];
+_listFilter:string;
+get listFilter():string{
+    return this._listFilter;
+}
+set listFilter(value:string){
+    this._listFilter=value;
+    this.employee=this.listFilter?this.performFilter(this.listFilter):this.employeedetails;
+}
+performFilter(filterBy: string): Employee[]{
+  filterBy=filterBy.toLocaleLowerCase();
+  return this.employeedetails.filter((employee : Employee) =>
+  employee.name.toLocaleLowerCase().indexOf(filterBy) !== -1);
+
+}
   constructor(private service:EmployeeService,
     private http:HttpClient,
     private router:Router){}
@@ -23,16 +37,7 @@ employee:Employee[];
         this.employeedetails = this.employee;
       },
      });
-   /* alert(`hello world`);
-    this.http.get('http://localhost:5594/api/Employee').subscribe(
-      data => {
-       this.employee = data as Employee [];
-      },
-      err => {
-        console.log(err);
-      }
-    );
-   //this.service.getDetails();*/
+
   }
 
   DeleteEmployee(id){

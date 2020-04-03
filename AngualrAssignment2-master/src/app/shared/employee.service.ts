@@ -73,6 +73,18 @@ export class EmployeeService {
         catchError(this.handleError)
       );
   }
+  getEmpProfile(email: string): Observable<Employee> {
+    if (email === null) {
+      return of(this.initializeEmployee());
+    }
+    const url = `${this.rooturl+'/EmployeeEmail'}/${email}`;
+    return this.http.get<Employee>(url)
+      .pipe(
+        tap(data => console.log('Employee Details: ' + JSON.stringify(data))),
+        catchError(this.handleError)
+      );
+  }
+
   public initializeEmployee(): Employee {
     // Return an initialized object
     return {
