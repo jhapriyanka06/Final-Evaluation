@@ -11,6 +11,7 @@ export class EmployeeService {
   employee:Employee;
   readonly rooturl='http://localhost:5594/api';
   list:Employee[];
+ 
   constructor(private http:HttpClient){}
 
   postEmployee(employee:Employee){
@@ -78,6 +79,7 @@ export class EmployeeService {
       return of(this.initializeEmployee());
     }
     const url = `${this.rooturl+'/EmployeeEmail'}/${email}`;
+   // this.emp=this.http.get<Employee>(url);
     return this.http.get<Employee>(url)
       .pipe(
         tap(data => console.log('Employee Details: ' + JSON.stringify(data))),

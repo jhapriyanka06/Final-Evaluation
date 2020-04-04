@@ -14,7 +14,7 @@ export class EmployeeComponent implements OnInit {
 
   constructor(public service:EmployeeService,private router:Router,private route:ActivatedRoute){}
   ngOnInit(): void {
-    this.resetForm();
+    this.employee=this.initializeEmployee();
     const id=+this.route.snapshot.paramMap.get('id');
     this.getEmp(id);
   }
@@ -52,19 +52,6 @@ export class EmployeeComponent implements OnInit {
       }
     )
   }
-  resetForm(form?:NgForm){
-    if(form!=null){
-    form.resetForm();
-    }
-    this.service.employee={
-    id:0,
-    name:'',
-    dob:'',
-    doj:'',
-    salary:0,
-    email:''
-    }
-  }
   onSaveComplete(): void {
 
     this.router.navigate(['/employeedetails']);
@@ -88,26 +75,15 @@ export class EmployeeComponent implements OnInit {
       }
     }
   }
-
-  /*saveEmployee(forms:NgForm): void {
-    if(true === true){
-      if (this.employee.id != 0) {
-        this.service.updateEmployee(this.employee).subscribe({
-          next: () => this.onSaveComplete(),
-          error: err => this.errorMessage = err
-        });
-      } else {
-        this.service.postEmployee().subscribe(
-          res =>{
-            this.resetForm(forms);
-            this.onSaveComplete();
-          },
-          err=>{
-            console.log(err);
-          }
-        )
-
-      }
+  public initializeEmployee(): Employee {
+    // Return an initialized object
+    return {
+      id:0,
+    name:'',
+    dob:'',
+    doj:'',
+    salary:0,
+    email:''
     }
-  }*/
+  }
 }

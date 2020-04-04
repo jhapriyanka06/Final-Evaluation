@@ -3,6 +3,7 @@ import { Leave } from '../shared/leave.model';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { throwError, Observable, of } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
+import { EmployeeLeaveMapping } from './apply-leave.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -64,5 +65,15 @@ export class LeaveService {
     maximumleavesallowed:'',
 
     }
+  }
+  DateToDays(arg0: number, arg1: number) {
+    return Math.round((arg1-arg0)/86400000)
+  }
+  createEmployeeLeave(employeeLeave: EmployeeLeaveMapping): Observable<EmployeeLeaveMapping> {
+   // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<EmployeeLeaveMapping>(this.rootUrl+'/EmployeeLeaveMapping', employeeLeave)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 }

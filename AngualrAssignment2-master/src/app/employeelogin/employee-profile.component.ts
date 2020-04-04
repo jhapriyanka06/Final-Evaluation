@@ -20,6 +20,7 @@ export class EmployeeProfileComponent implements OnInit {
     const email=this.route.snapshot.paramMap.get('email');
     this.getEmpProfile(email);
   }
+  
   private initializeEmployee(): Employee {
     // Return an initialized object
     return {
@@ -31,9 +32,11 @@ export class EmployeeProfileComponent implements OnInit {
     email:''
     }
   }
+  public emailId:number;
   getEmpProfile(email:string):void{
     this.services.getEmpProfile(email).subscribe({
-         next:employee  => this.onEmployeeRetrieved(employee),
+         next:employee  => {this.onEmployeeRetrieved(employee);
+        this.emailId=employee.id},
          error:err => this.errorMessage=err
     });
 }

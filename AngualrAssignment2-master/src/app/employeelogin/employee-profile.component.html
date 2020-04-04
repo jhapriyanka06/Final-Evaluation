@@ -7,7 +7,7 @@
         <a class="nav-link">Profile</a>
       </li>
       <li style="float:right" class="nav-item" [routerLinkActive]="['link-active']">
-        <a class="nav-link">Leave</a>
+        <a class="nav-link" [routerLink]="['/applyleave']">Leave</a>
       </li>
       <li style="float:right" class="nav-item" [routerLinkActive]="['link-active']">
         <a class="nav-link" [routerLink]="['/employeelogin']">Back</a>
@@ -17,18 +17,7 @@
 
   </nav>
   <div class="card-body">
-   <!-- <div class="table-responsive">
-      <table class="table mb-0">
-          <tr>
-          <td>NAME: </td>
-          <td>EMAIL ID: </td>
-          </tr>
-          <tr>
-          <td>DATE OF BIRTH: </td>
-          <td>DATE OF JOINING: </td>
-        </tr>
-        </table>
-      </div>-->
+
 
         <label>Name:</label><br>
         <label>{{employee.name}}</label><br><br>

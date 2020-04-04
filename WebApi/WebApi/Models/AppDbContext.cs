@@ -14,5 +14,6 @@ namespace WebApi.Models
         }
         public DbSet<Employee> employee { get; set; }
         public DbSet<Leave> leave { get; set; }
+        public DbSet<EmployeeLeaveMapping> empleavemap { get; set; }
     }
 }

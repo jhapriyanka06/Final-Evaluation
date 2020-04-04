@@ -1,17 +1,25 @@
 
 <nav class="navbar navbar-expand navbar-light bg-light">
   <a class="navbar-brand">{{pageTitle}}</a>
+  <ul class="navbar-nav">
+    <li  class="nav-item" [routerLinkActive]="['link-active']">
+      <a style="float:right" class="nav-link" [routerLink]="['/employeelogin']">Back</a>
+    </li>
 
+  </ul>
 </nav>
 <div class="container">
-  <form>
+  <form #form="ngForm" >
     <label>LEAVE TYPE:</label><br />
-    <input type="text" placeholder="User Name" name="username" /><br /><br />
+    <select class="form-control" name="leavename" [(ngModel)]="leaves.leavename">
+      <option></option>
+      <option *ngFor="let l of leave">{{l.leavename}}</option>
+    </select><br /><br />
     <label>FROM DATE:</label><br />
-    <input type="date" placeholder="Password" name="pwd" /><br /><br />
+    <input class="form-control" type="date" placeholder="dd/mm/yyyy" name="leavestartdate"  [(ngModel)]="applyleave.leavestartdate" /><br /><br />
     <label>TO DATE:</label><br />
-    <input type="date" placeholder="Password" name="pwd" /><br /><br />
-    <a  class="btn btn-primary" [routerLink]="['/AdminLogin']">Save</a>
+    <input class="form-control" type="date" placeholder="dd/mm/yyyy" name="leaveenddate" [min]="applyleave.leavestartdate" [(ngModel)]="applyleave.leaveenddate"  /><br /><br />
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="onSave(form)">Save</button>
   </form>
 </div>
 
