@@ -18,12 +18,14 @@
 
     </ul>
   </nav>
-  <div class="card-body">
+
     <h3>Leave Balance</h3>
-    <label>Casual: 16</label>
-    <label>Sick: 3</label>
-    <label>Restricted: 2</label>
-    <div class="table-responsive">
+    <div class="row">
+    <div class="col md-2" *ngFor="let l of leaveDetails">{{l.leavename}}:{{l.maximumleavesallowed}}</div>
+  </div>
+</div>
+  <div class="card-body">
+   <div class="table-responsive">
       <table class="table mb-0">
         <thead>
           <tr>
@@ -34,11 +36,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>28-03-2020 to 31-03-2020</td>
-            <td>Casual Leave</td>
-            <td>4</td>
-            <td>Accepted</td>
+          <tr *ngFor="let myleav of leavemappingdetails">
+            <td>{{myleav.leavestartdate}} to {{myleav.leaveenddate}}</td>
+            <td>{{myleav.leavetype}}</td>
+            <td>{{myleav.days}}</td>
+            <td>{{myleav.status}}</td>
              <td>
           </tr>
          </tbody>

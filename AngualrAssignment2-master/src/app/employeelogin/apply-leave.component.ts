@@ -3,8 +3,9 @@ import { Leave } from '../shared/leave.model';
 import { EmployeeLeaveMapping } from '../shared/apply-leave.model';
 import { LeaveService } from '../shared/leave.service';
 import { EmployeeService } from '../shared/employee.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {NgForm} from '@angular/forms';
+import { ApplyLeaveService } from '../shared/apply-leave.service';
 
 @Component({
   selector:'apply-leave',
@@ -16,28 +17,85 @@ export class ApplyLeaveComponent implements OnInit {
   leave:Leave[];
   leaveDetails:Leave[]=[];
   applyleave:EmployeeLeaveMapping;
-  Days:number;
+  days:number;
   leavename:string='';
   leaves:Leave ;
-
+  leaves_t:Leave;
+  empId:number;
+  lid:number;
+  leavemappingdetails:EmployeeLeaveMapping[]=[];
+  leavemapping:EmployeeLeaveMapping[];
   constructor(private service:LeaveService,private services:EmployeeService,
-              private router:Router){}
-  
+              private router:Router,private route:ActivatedRoute,private Leaveservice:ApplyLeaveService){}
+
     ngOnInit(): void {
     this.applyleave=this.initializeLeave();
     this.leaves=this.initialize();
+    const ID=+this.route.snapshot.paramMap.get('id');
+    this.applyleave.employeeid=ID;
+    this.empId=ID;
     this.service.getLeaves().subscribe({
     next: leave => {
       this.leave = leave;
       this.leaveDetails = this.leave;
     },
    });
+
+   this.Leaveservice.getLeaves().subscribe({
+    next: leave => {
+      this.leavemapping = leave;
+      this.leavemappingdetails = this.leavemapping.filter(l => l.employeeid===ID);
+      this.LeaveListRetrieved();
+    },
+   });
 }
+leftdays:number;
+  onSave(form:NgForm){
+
+    this.days =this.service.Convert(new Date(form.value.leavestartdate).getTime(),new Date(form.value.leaveenddate).getTime())
+   /* for(var j=0;j<this.leavemappingdetails.length;j++){
+      this.leaves_t = this.leaveDetails.find(l => l.id === this.leavemappingdetails[j].leaveid );
+
+      this.leaves_t.maximumleavesallowed=this.leaves_t.maximumleavesallowed-this.leavemappingdetails[j].days;
+      alert( this.leaves_t.maximumleavesallowed);
+      this.leftdays=this.leaves_t.maximumleavesallowed;
+
+
+    }*/
+      this.leaves = this.leaveDetails.find(l => l.leavename === form.value.leavename);
+      if(this.days > 0 && this.days <= +this.leaves.maximumleavesallowed)
+      {
+
+          this.applyleave.leaveid = this.leaves.id;
+          this.applyleave.leavestartdate=form.value.leavestartdate;
+          this.applyleave.leaveenddate=form.value.leaveenddate;
+          this.service.createEmployeeLeave(this.applyleave).subscribe( res =>{
+            alert(`successful`);
+            this.lid=res.id;
+            this.onSaveComplete();
+          },
+          err=>{
+            console.log(err);
+          }
+          )
+        }
+        else{
+          alert(`give a valid end date`);
+        }
+    }
+
+    LeaveListRetrieved(): void {
+      for(var j=0;j<this.leavemappingdetails.length;j++){
+        this.leaves_t = this.leaveDetails.find(l => l.id === this.leavemappingdetails[j].leaveid );
+        this.leaves_t.maximumleavesallowed=this.leaves_t.maximumleavesallowed-this.leavemappingdetails[j].days;
+
+      }
+    }
 private initialize():Leave{
   return{
     id: 0,
     leavename:'',
-    maximumleavesallowed: '2'
+    maximumleavesallowed: 0
   }
 }
 
@@ -48,34 +106,12 @@ private initialize():Leave{
       leaveid:0,
       leavestartdate:new Date(),
       leaveenddate:new Date(),
-      status:"pending"
+      status:"pending",
+      days:0,
+      leavetype:''
     }
   }
-  onSave(form:NgForm){
-    
-    this.Days =this.service.DateToDays(new Date(form.value.leavestartdate).getTime(),new Date(form.value.leaveenddate).getTime())
-    if(form.value.leavestartdate && form.value.leaveenddate)
-    {
-      this.leaves = this.leaveDetails.find(a => a.leavename === form.value.leavename);
-      if(this.Days > 0 && this.Days <= +this.leaves.maximumleavesallowed)
-      {
-         // this.applyleave.employeeid = this.services.employee.id;
-          this.applyleave.leaveid = this.leaves.id;
-          this.applyleave.leavestartdate=form.value.leavestartdate;
-          this.applyleave.leaveenddate=form.value.leaveenddate;
-          this.service.createEmployeeLeave(this.applyleave).subscribe( res =>{
-            alert(`successful`);
-            this.onSaveComplete();
-          },
-          err=>{
-            console.log(err);
-          }
-          )
-
-    }
-  }
-}
 onSaveComplete(message?: string): void {
-  this.router.navigate(['/myleave']);
+  this.router.navigate(['/employeeleavelist',this.empId]);
 }
 }

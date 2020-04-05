@@ -20,6 +20,7 @@ import { ApplyLeaveComponent } from './employeelogin/apply-leave.component';
 import { EmployeeService } from './shared/employee.service';
 import { LeaveService } from './shared/leave.service';
 import { MyLeavesComponent } from './employeelogin/myleaves.component';
+import { ApplyLeaveService } from './shared/apply-leave.service';
 
 
 
@@ -52,13 +53,14 @@ import { MyLeavesComponent } from './employeelogin/myleaves.component';
      {path:'LeaveListComponent', component:LeaveListComponent},
      {path:'employeelogin', component:EmployeeLoginComponent},
      {path:'employee/:email', component:EmployeeProfileComponent},
-     {path:'applyleave', component:ApplyLeaveComponent},
-     {path:'myleave', component:MyLeavesComponent},
+     {path:'applyleave/:id', component:ApplyLeaveComponent},
+     {path:'employeeleavelist/:id', component:MyLeavesComponent},
      {path:'', redirectTo:'welcome', pathMatch:'full'}
    ])
   ],
   providers: [EmployeeService,
-  LeaveService],
+  LeaveService,
+ApplyLeaveService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

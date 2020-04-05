@@ -18,8 +18,9 @@
     <label>FROM DATE:</label><br />
     <input class="form-control" type="date" placeholder="dd/mm/yyyy" name="leavestartdate"  [(ngModel)]="applyleave.leavestartdate" /><br /><br />
     <label>TO DATE:</label><br />
-    <input class="form-control" type="date" placeholder="dd/mm/yyyy" name="leaveenddate" [min]="applyleave.leavestartdate" [(ngModel)]="applyleave.leaveenddate"  /><br /><br />
+    <input class="form-control" type="date" placeholder="dd/mm/yyyy" name="leaveenddate"  [(ngModel)]="applyleave.leaveenddate"  /><br /><br />
     <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="onSave(form)">Save</button>
   </form>
+  <button class="btn btn-primary" [routerLink]="['/employeeleavelist',this.empId]">View Leave List</button>
 </div>
 

@@ -62,12 +62,12 @@ export class LeaveService {
     return {
       id:0,
     leavename:'',
-    maximumleavesallowed:'',
+    maximumleavesallowed:0
 
     }
   }
-  DateToDays(arg0: number, arg1: number) {
-    return Math.round((arg1-arg0)/86400000)
+  Convert(arg0: number, arg1: number) {
+    return Math.round((arg1-arg0)/86400000);
   }
   createEmployeeLeave(employeeLeave: EmployeeLeaveMapping): Observable<EmployeeLeaveMapping> {
    // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });

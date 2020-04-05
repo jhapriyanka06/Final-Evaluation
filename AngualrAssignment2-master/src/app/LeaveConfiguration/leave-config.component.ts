@@ -29,7 +29,7 @@ export class LeaveConfigComponent implements OnInit {
       this.services.leaves={
       id:0,
       leavename:'',
-      maximumleavesallowed:''
+      maximumleavesallowed:0
       }
     }
 

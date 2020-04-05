@@ -13,6 +13,6 @@ namespace WebApi.Models
         [Required]
         public string leavename { get; set; }
         [Required]
-        public string maximumleavesallowed { get; set; }
+        public int maximumleavesallowed { get; set; }
     }
 }

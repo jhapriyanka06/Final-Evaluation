@@ -4,5 +4,7 @@ export interface EmployeeLeaveMapping{
   leaveid:number,
   leavestartdate:Date,
   leaveenddate:Date,
-  status:string
+  status:string,
+  days:number,
+  leavetype:string
 }
