@@ -62,7 +62,7 @@ export class LeaveService {
     return {
       id:0,
     leavename:'',
-    maximumleavesallowed:0
+    maximumleavesallowed:''
 
     }
   }

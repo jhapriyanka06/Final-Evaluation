@@ -21,6 +21,6 @@
     <input class="form-control" type="date" placeholder="dd/mm/yyyy" name="leaveenddate"  [(ngModel)]="applyleave.leaveenddate"  /><br /><br />
     <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="onSave(form)">Save</button>
   </form>
-  <button class="btn btn-primary" [routerLink]="['/employeeleavelist',this.empId]">View Leave List</button>
+  <button style="margin-top: 10px;" class="btn btn-primary" [routerLink]="['/employeeleavelist',this.empId]">View Leave List</button>
 </div>
 

@@ -18,7 +18,8 @@ export class LeaveConfigComponent implements OnInit {
     private route:ActivatedRoute){}
 
     ngOnInit(): void {
-      this.resetForm();
+     // this.resetForm();
+      this.leave=this.initializeLeave();
       const id=+this.route.snapshot.paramMap.get('id');
       this.getLeave(id);
     }
@@ -29,7 +30,7 @@ export class LeaveConfigComponent implements OnInit {
       this.services.leaves={
       id:0,
       leavename:'',
-      maximumleavesallowed:0
+      maximumleavesallowed:''
       }
     }
 
@@ -86,6 +87,13 @@ export class LeaveConfigComponent implements OnInit {
       } else {
         this.pageTitle = `Edit Leave: ${this.leave.leavename}`;
       }
+    }
+  }
+  initializeLeave(){
+    return{
+      id:0,
+      leavename:'',
+      maximumleavesallowed:''
     }
   }
 }

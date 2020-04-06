@@ -4,10 +4,7 @@
     <a class="navbar-brand">{{pageTitle}}</a>
     <ul class="navbar-nav">
       <li style="float:right" class="nav-item" [routerLinkActive]="['link-active']">
-        <a class="nav-link">Profile</a>
-      </li>
-      <li style="float:right" class="nav-item" [routerLinkActive]="['link-active']">
-        <a class="nav-link" [routerLink]="['/applyleave',this.Id]">Leave</a>
+        <a class="nav-link" [routerLink]="['/applyleave',this.Id]">Apply-Leave</a>
       </li>
       <li style="float:right" class="nav-item" [routerLinkActive]="['link-active']">
         <a class="nav-link" [routerLink]="['/employeelogin']">Back</a>

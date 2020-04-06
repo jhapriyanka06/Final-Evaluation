@@ -87,7 +87,7 @@ leftdays:number;
     LeaveListRetrieved(): void {
       for(var j=0;j<this.leavemappingdetails.length;j++){
         this.leaves_t = this.leaveDetails.find(l => l.id === this.leavemappingdetails[j].leaveid );
-        this.leaves_t.maximumleavesallowed=this.leaves_t.maximumleavesallowed-this.leavemappingdetails[j].days;
+        //this.leaves_t.maximumleavesallowed=this.leaves_t.maximumleavesallowed-this.leavemappingdetails[j].days;
 
       }
     }
@@ -95,7 +95,7 @@ private initialize():Leave{
   return{
     id: 0,
     leavename:'',
-    maximumleavesallowed: 0
+    maximumleavesallowed: ''
   }
 }
 

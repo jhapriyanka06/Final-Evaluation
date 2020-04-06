@@ -21,6 +21,7 @@ import { EmployeeService } from './shared/employee.service';
 import { LeaveService } from './shared/leave.service';
 import { MyLeavesComponent } from './employeelogin/myleaves.component';
 import { ApplyLeaveService } from './shared/apply-leave.service';
+import { LeavesService } from './shared/Leaves.service';
 
 
 
@@ -60,7 +61,8 @@ import { ApplyLeaveService } from './shared/apply-leave.service';
   ],
   providers: [EmployeeService,
   LeaveService,
-ApplyLeaveService],
+ApplyLeaveService,
+LeavesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

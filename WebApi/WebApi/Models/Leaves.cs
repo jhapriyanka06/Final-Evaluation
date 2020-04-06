@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace WebApi.Models
 {
-    public class Leave
+    public class Leaves
     {
         [Key]
         public int id { get; set; }
         [Required]
         public string leavename { get; set; }
         [Required]
-        public string maximumleavesallowed { get; set; }
+        public int maximumleavesallowed { get; set; }
     }
 }

@@ -19,13 +19,15 @@ export class MyLeavesComponent implements OnInit {
   leaved:Leave[];
   leaveDetails:Leave[]=[];
   days:number;
+  Id:number;
+email:string;
 constructor(private route:ActivatedRoute,private service:ApplyLeaveService,private services:LeaveService){}
 
   ngOnInit(): void {
     this.empleavmap=this.initializeList();
     this.leaves=this.initialize();
     const id=+this.route.snapshot.paramMap.get('id');
-
+    this.Id=id;
     this.services.getLeaves().subscribe({
       next: Leave => {
         this.leaved= Leave;
@@ -49,10 +51,11 @@ LeaveListRetrieved(): void {
   }
   for(var j=0;j<this.leavemappingdetails.length;j++){
     this.leaves = this.leaveDetails.find(l => l.id === this.leavemappingdetails[j].leaveid );
-    this.leaves.maximumleavesallowed=this.leaves.maximumleavesallowed-this.leavemappingdetails[j].days;
-    if(this.leaves.maximumleavesallowed<0){
+    this.leaves.maximumleavesallowed=(+this.leaves.maximumleavesallowed-this.leavemappingdetails[j].days).toString();
+
+   /* if(this.leaves.maximumleavesallowed<0){
       alert(`you can't apply for leave`)
-    }
+    }*/
     this.leavemappingdetails[j].leavetype=this.leaves.leavename;
   }
 }
@@ -73,7 +76,7 @@ LeaveListRetrieved(): void {
     return{
       id:0,
       leavename:'',
-      maximumleavesallowed:0
+      maximumleavesallowed:''
     }
   }
 }
