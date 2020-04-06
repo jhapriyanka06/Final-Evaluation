@@ -6,5 +6,7 @@ export interface EmployeeLeaveMapping{
   leaveenddate:Date,
   status:string,
   days:number,
-  leavetype:string
+  leavetype:string,
+  employeename:string,
+  leftdays:string
 }

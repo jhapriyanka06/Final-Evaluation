@@ -26,6 +26,9 @@ export class ApplyLeaveService{
         catchError(this.handleError)
       );
   }
+  putEmployee(empleavmap:EmployeeLeaveMapping){
+    return this.http.put(this.rooturl+'/EmployeeLeaveMapping/'+empleavmap.id,empleavmap);
+   }
   getLeaves():Observable<EmployeeLeaveMapping[]>{
     return this.http.get<EmployeeLeaveMapping[]>(this.rooturl+'/EmployeeLeaveMapping')
       .pipe(
@@ -50,7 +53,9 @@ export class ApplyLeaveService{
       leaveenddate:new Date(),
       status:"pending",
       days:0,
-      leavetype:''
+      leavetype:'',
+      employeename:'',
+      leftdays:''
     }
   }
   private handleError(err) {

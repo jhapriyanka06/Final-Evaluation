@@ -108,7 +108,9 @@ private initialize():Leave{
       leaveenddate:new Date(),
       status:"pending",
       days:0,
-      leavetype:''
+      leavetype:'',
+      employeename:'',
+      leftdays:''
     }
   }
 onSaveComplete(message?: string): void {

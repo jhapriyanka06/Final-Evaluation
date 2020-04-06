@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from '../shared/employee.model';
 import { EmployeeService } from '../shared/employee.service';
 import { NgForm } from '@angular/forms';
+
 import {ActivatedRoute, Router} from '@angular/router';
 @Component({
   selector:'employee-form',
@@ -11,6 +12,8 @@ export class EmployeeComponent implements OnInit {
   pageTitle:string = 'Add Employee';
   errorMessage:string;
   employee:Employee;
+  employees:Employee[];
+  employeedetails:Employee[]=[];
 
   constructor(public service:EmployeeService,private router:Router,private route:ActivatedRoute){}
   ngOnInit(): void {
@@ -86,4 +89,21 @@ export class EmployeeComponent implements OnInit {
     email:''
     }
   }
+  emailAlredyExist = "";
+  emid:string;
+emailCheckUnique(email:string) {
+this.service.getEmployees().subscribe({
+  next: employee => {
+    this.employees= employee;
+    this.employeedetails = this.employees;
+    this.employeedetails=this.employees.filter(a => a.email===email);
+    if(this.employeedetails.length>0){
+      this.emailAlredyExist = "Email Already Exists";
+    }
+    else{
+      this.emailAlredyExist = "";
+    }
+  },
+ });
+}
 }

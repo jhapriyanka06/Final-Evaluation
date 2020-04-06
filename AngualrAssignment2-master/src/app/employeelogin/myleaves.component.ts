@@ -69,7 +69,9 @@ LeaveListRetrieved(): void {
       leaveenddate:new Date(),
       status:"pending",
       days:0,
-      leavetype:''
+      leavetype:'',
+      employeename:'',
+      leftdays:''
     }
   }
   initialize(){

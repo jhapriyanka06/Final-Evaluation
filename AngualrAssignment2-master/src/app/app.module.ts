@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, NG_VALIDATORS} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { RouterModule} from '@angular/router';
 
@@ -22,6 +22,7 @@ import { LeaveService } from './shared/leave.service';
 import { MyLeavesComponent } from './employeelogin/myleaves.component';
 import { ApplyLeaveService } from './shared/apply-leave.service';
 import { LeavesService } from './shared/Leaves.service';
+import { EmployeeLeaveListComponent } from './LeaveConfiguration/employee-leave-list.component';
 
 
 
@@ -39,7 +40,8 @@ import { LeavesService } from './shared/Leaves.service';
    EmployeeLoginComponent,
    EmployeeProfileComponent,
    ApplyLeaveComponent,
-   MyLeavesComponent
+   MyLeavesComponent,
+   EmployeeLeaveListComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +58,7 @@ import { LeavesService } from './shared/Leaves.service';
      {path:'employee/:email', component:EmployeeProfileComponent},
      {path:'applyleave/:id', component:ApplyLeaveComponent},
      {path:'employeeleavelist/:id', component:MyLeavesComponent},
+     {path:'employeeleavelist', component:EmployeeLeaveListComponent},
      {path:'', redirectTo:'welcome', pathMatch:'full'}
    ])
   ],

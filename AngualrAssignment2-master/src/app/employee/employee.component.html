@@ -25,7 +25,10 @@
       <label>Name:</label><br>
       <input class="form-control" type="text" name="name" placeholder="Name" [(ngModel)]="employee.name" required><br><br>
       <label>Email-Id:</label><br>
-      <input class="form-control" type="email" name="email" placeholder="Email-id" [(ngModel)]="employee.email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required><br><br>
+      <input class="form-control" type="email" name="email" placeholder="Email-id" (change)="emailCheckUnique(forms.value.email)" [(ngModel)]="employee.email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required><br><br>
+      <div *ngIf="emailAlredyExist != ''" class="alert alert-danger">
+        {{emailAlredyExist}}
+      </div>
       <label>Date Of Joining:</label><br>
       <input class="form-control" type="date" name="doj" placeholder="dd/mm/yyyy" [(ngModel)]="employee.doj" required><br><br>
       <label>Date Of Birth:</label><br>
