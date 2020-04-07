@@ -89,27 +89,6 @@ export class EmployeeLeaveListComponent implements OnInit {
     }
   }
 
-  listRetrieved(form:NgForm){
-    for(var item=0;item<this.leavemappingdetails.length;item++){
-      if(this.leavemappingdetails[item].employeename==form.value.employeename)
-      {
-        for(var i=0;i<this.leavemappingdetails.length;i++){
-          this.leavemappingdetails[i].days =this.empleaveervice.Convert(new Date(this.leavemappingdetails[i].leavestartdate).getTime(),new Date(this.leavemappingdetails[i].leaveenddate).getTime());
-        }
-        for(var j=0;j<this.leavemappingdetails.length;j++){
-          this.leaves = this.leaveDetails.find(l => l.id === this.leavemappingdetails[j].leaveid );
-          this.leaves.maximumleavesallowed=(+this.leaves.maximumleavesallowed-this.leavemappingdetails[j].days).toString();
-          this.leavemappingdetails[j].leftdays=this.leaves.maximumleavesallowed;
-          this.leavemappingdetails[j].leavetype=this.leaves.leavename;
-        }
-        for(var k=0;k<this.leavemappingdetails.length;k++){
-          this.employee=this.employeedetails.find(e =>e.id===this.leavemappingdetails[k].employeeid);
-          this.leavemappingdetails[k].employeename=this.employee.name;
-        }
-      }
-    }
-
-  }
   onsave(status:string,id:number){
     this.empleavmap=this.leavemappingdetails.find(a => a.id===id);
     this.empleavmap.status=status;
