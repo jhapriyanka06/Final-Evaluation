@@ -45,25 +45,24 @@ export class ApplyLeaveComponent implements OnInit {
     next: leave => {
       this.leavemapping = leave;
       this.leavemappingdetails = this.leavemapping.filter(l => l.employeeid===ID);
-      this.LeaveListRetrieved();
     },
    });
 }
-leftdays:number;
+left:number;
   onSave(form:NgForm){
-
-    this.days =this.service.Convert(new Date(form.value.leavestartdate).getTime(),new Date(form.value.leaveenddate).getTime())
-   /* for(var j=0;j<this.leavemappingdetails.length;j++){
-      this.leaves_t = this.leaveDetails.find(l => l.id === this.leavemappingdetails[j].leaveid );
-
-      this.leaves_t.maximumleavesallowed=this.leaves_t.maximumleavesallowed-this.leavemappingdetails[j].days;
-      alert( this.leaves_t.maximumleavesallowed);
-      this.leftdays=this.leaves_t.maximumleavesallowed;
-
-
-    }*/
+    for(var i=0;i<this.leavemappingdetails.length;i++){
+      this.leavemappingdetails[i].days =this.service.Convert(new Date(this.leavemappingdetails[i].leavestartdate).getTime(),new Date(this.leavemappingdetails[i].leaveenddate).getTime());
+    }
+    for(var j=0;j<this.leavemappingdetails.length;j++){
+      this.leaves = this.leaveDetails.find(l => l.id === this.leavemappingdetails[j].leaveid );
+      if(this.leaves.leavename==form.value.leavename){
+        this.leaves.maximumleavesallowed=(+this.leaves.maximumleavesallowed-this.leavemappingdetails[j].days).toString();
+        this.left=+this.leaves.maximumleavesallowed;
+      }
+   }
+   this.days =this.service.Convert(new Date(form.value.leavestartdate).getTime(),new Date(form.value.leaveenddate).getTime());
       this.leaves = this.leaveDetails.find(l => l.leavename === form.value.leavename);
-      if(this.days > 0 && this.days <= +this.leaves.maximumleavesallowed)
+      if(this.days > 0 && this.days <= +this.left)
       {
 
           this.applyleave.leaveid = this.leaves.id;
@@ -79,17 +78,14 @@ leftdays:number;
           }
           )
         }
-        else{
-          alert(`give a valid end date`);
+        else if(this.left==0){
+          alert(`You Cannot Apply For Any More ${form.value.leavename}`);
+          alert(`please refresh the page before applying for another leave`);
         }
-    }
-
-    LeaveListRetrieved(): void {
-      for(var j=0;j<this.leavemappingdetails.length;j++){
-        this.leaves_t = this.leaveDetails.find(l => l.id === this.leavemappingdetails[j].leaveid );
-        //this.leaves_t.maximumleavesallowed=this.leaves_t.maximumleavesallowed-this.leavemappingdetails[j].days;
-
-      }
+        else{
+          alert(`You Can Apply For ${this.left} days ${form.value.leavename} only`);
+          alert(`please refresh the page before applying for another leave`);
+        }
     }
 private initialize():Leave{
   return{

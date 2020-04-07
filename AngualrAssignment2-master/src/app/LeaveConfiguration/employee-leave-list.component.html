@@ -12,18 +12,18 @@
   </nav>
   <div class="card-body">
     <div class="row">
+         <div class="col-md-2">
+           <label>Filter By:</label>
+           <input type="text" placeholder="Leave Type" name="leavename">
+         </div>
       <div class="col-md-2">
-        Filter By:<input type="text" placeholder="Leave Type">
-      </div>
-      <div class="col-md-2">
-        Filter By:<input type="text" placeholder="Employee Name" [(ngModel)]='listFilter'>
+        <label>Filter By:</label>
+        <input type="text" placeholder="Employee Name" name="employeename" [(ngModel)]='listFilter'>
     </div>
-
-    </div>
-      <div style="float:right" class="nav-item" [routerLinkActive]="['link-active']">
+   <div style="float:right" class="nav-item" [routerLinkActive]="['link-active']">
         <a class="nav-link" [routerLink]="['/employeeadd',0,'edit']">Back</a>
       </div>
-
+  </div>
 
 
     <div class="table-responsive">
