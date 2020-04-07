@@ -50,6 +50,34 @@ export class ApplyLeaveComponent implements OnInit {
 }
 left:number;
   onSave(form:NgForm){
+   if(this.leavemappingdetails.length==0){
+   this.days =this.service.Convert(new Date(form.value.leavestartdate).getTime(),new Date(form.value.leaveenddate).getTime());
+      this.leaves = this.leaveDetails.find(l => l.leavename === form.value.leavename);
+      if(this.days > 0 && this.days <= +this.leaves.maximumleavesallowed)
+      {
+          this.applyleave.leaveid = this.leaves.id;
+          this.applyleave.leavestartdate=form.value.leavestartdate;
+          this.applyleave.leaveenddate=form.value.leaveenddate;
+          this.service.createEmployeeLeave(this.applyleave).subscribe( res =>{
+            alert(`Leave Added Successfully`);
+            this.lid=res.id;
+            this.onSaveComplete();
+          },
+          err=>{
+            console.log(err);
+          }
+          )
+        }
+        else if(this.left==0){
+          alert(`You Cannot Apply For Any More ${form.value.leavename}`);
+          alert(`please refresh the page before applying for another leave`);
+        }
+        else{
+          alert(`You Can Apply For ${this.left} days ${form.value.leavename} only`);
+          alert(`please refresh the page before applying for another leave`);
+        }
+  }
+  else{
     for(var i=0;i<this.leavemappingdetails.length;i++){
       this.leavemappingdetails[i].days =this.service.Convert(new Date(this.leavemappingdetails[i].leavestartdate).getTime(),new Date(this.leavemappingdetails[i].leaveenddate).getTime());
     }
@@ -86,6 +114,7 @@ left:number;
           alert(`You Can Apply For ${this.left} days ${form.value.leavename} only`);
           alert(`please refresh the page before applying for another leave`);
         }
+       }
     }
 private initialize():Leave{
   return{
