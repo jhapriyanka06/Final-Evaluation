@@ -68,12 +68,12 @@ left:number;
           }
           )
         }
-        else if(this.left==0){
+        else if(this.leaves.maximumleavesallowed=='0'){
           alert(`You Cannot Apply For Any More ${form.value.leavename}`);
           alert(`please refresh the page before applying for another leave`);
         }
         else{
-          alert(`You Can Apply For ${this.left} days ${form.value.leavename} only`);
+          alert(`You Can Apply For ${this.leaves.maximumleavesallowed} days ${form.value.leavename} only`);
           alert(`please refresh the page before applying for another leave`);
         }
   }
@@ -90,7 +90,7 @@ left:number;
    }
    this.days =this.service.Convert(new Date(form.value.leavestartdate).getTime(),new Date(form.value.leaveenddate).getTime());
       this.leaves = this.leaveDetails.find(l => l.leavename === form.value.leavename);
-      if(this.days > 0 && this.days <= +this.left)
+      if(this.days > 0 && this.days <= +this.leaves.maximumleavesallowed)
       {
 
           this.applyleave.leaveid = this.leaves.id;
@@ -106,12 +106,12 @@ left:number;
           }
           )
         }
-        else if(this.left==0){
+        else if(this.leaves.maximumleavesallowed=='0'){
           alert(`You Cannot Apply For Any More ${form.value.leavename}`);
           alert(`please refresh the page before applying for another leave`);
         }
         else{
-          alert(`You Can Apply For ${this.left} days ${form.value.leavename} only`);
+          alert(`You Can Apply For ${this.leaves.maximumleavesallowed} days ${form.value.leavename} only`);
           alert(`please refresh the page before applying for another leave`);
         }
        }
