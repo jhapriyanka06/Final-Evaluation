@@ -26,6 +26,7 @@ export class LeaveListComponent implements OnInit {
      });
   }
   DeleteLeave(id){
+    if (confirm(`Really delete the leave?`)) {
     this.services.deleteLeave(id).subscribe(
       res =>{
         this.onSaveComplete();
@@ -34,6 +35,7 @@ export class LeaveListComponent implements OnInit {
         console.log(err);
       }
     )
+  }
   }
   onSaveComplete(): void {
     this.services.getLeaves().subscribe({
