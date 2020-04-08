@@ -41,6 +41,7 @@ performFilter(filterBy: string): Employee[]{
   }
 
   DeleteEmployee(id){
+    if (confirm(`Really delete the employee?`)) {
     this.service.deleteEmployee(id).subscribe(
       res =>{
 
@@ -50,6 +51,7 @@ performFilter(filterBy: string): Employee[]{
         console.log(err);
       }
     )
+  }
   }
    onSaveComplete(): void {
     this.service.getEmployees().subscribe({
