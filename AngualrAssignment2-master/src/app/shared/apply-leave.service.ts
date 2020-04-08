@@ -37,13 +37,10 @@ export class ApplyLeaveService{
       );
 
   }
-  /*getLeaves():Observable<EmployeeLeaveMapping[]>{
-    return this.http.get<EmployeeLeaveMapping[]>(this.rooturl+'/Employ')
-      .pipe(
-        tap(data => console.log(JSON.stringify(data))),
-        catchError(this.handleError)
-      );
-  }*/
+  deleteEmployee(id){
+    return this.http.delete(this.rooturl+'/EmployeeLeaveMapping/'+id);
+   }
+
   initializeList(){
     return{
       id:0,
