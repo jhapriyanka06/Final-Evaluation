@@ -97,7 +97,7 @@ left:number;
           this.applyleave.leavestartdate=form.value.leavestartdate;
           this.applyleave.leaveenddate=form.value.leaveenddate;
           this.service.createEmployeeLeave(this.applyleave).subscribe( res =>{
-            alert(`successful`);
+            alert(`Leave Added Successfully`);
             this.lid=res.id;
             this.onSaveComplete();
           },
