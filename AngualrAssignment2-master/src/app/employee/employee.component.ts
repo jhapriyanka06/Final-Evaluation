@@ -36,7 +36,7 @@ export class EmployeeComponent implements OnInit {
   insertEmployee(employee:Employee){
     this.service.postEmployee(employee).subscribe(
       res =>{
-        //this.resetForm(form);
+        alert(`employee successfully added`);
         this.onSaveComplete();
       },
       err=>{
@@ -47,7 +47,7 @@ export class EmployeeComponent implements OnInit {
   updateEmployee(employee:Employee){
     this.service.putEmployee(employee).subscribe(
       res =>{
-        //this.resetForm(form);
+        alert(`employee successfully updated`);
         this.onSaveComplete();
       },
       err=>{
