@@ -21,9 +21,7 @@ export class ApplyLeaveComponent implements OnInit {
   days:number;
   leavename:string='';
   leaves:Leave ;
-  leaves_t:Leave;
   empId:number;
-  lid:number;
   employee:Employee;
   employees:Employee[];
   employeedetails:Employee[]=[];
@@ -58,7 +56,6 @@ export class ApplyLeaveComponent implements OnInit {
     },
    });
 }
-left:number;
   onSave(form:NgForm){
    if(this.leavemappingdetails.length==0){
    this.days =this.service.Convert(new Date(form.value.leavestartdate).getTime(),new Date(form.value.leaveenddate).getTime());
@@ -70,7 +67,6 @@ left:number;
           this.applyleave.leaveenddate=form.value.leaveenddate;
           this.service.createEmployeeLeave(this.applyleave).subscribe( res =>{
             alert(`Leave Added Successfully`);
-            this.lid=res.id;
             this.onSaveComplete();
           },
           err=>{
@@ -80,6 +76,7 @@ left:number;
         }
         else if(this.days<0){
           alert(`give a valid end date`);
+          alert(`please refresh the page before applying for another leave`);
         }
         else if(this.leaves.maximumleavesallowed=='0'){
           alert(`You Cannot Apply For Any More ${form.value.leavename}`);
@@ -98,7 +95,6 @@ left:number;
       this.leaves = this.leaveDetails.find(l => l.id === this.leavemappingdetails[j].leaveid );
       if(this.leaves.leavename==form.value.leavename){
         this.leaves.maximumleavesallowed=(+this.leaves.maximumleavesallowed-this.leavemappingdetails[j].days).toString();
-        this.left=+this.leaves.maximumleavesallowed;
       }
    }
    this.days =this.service.Convert(new Date(form.value.leavestartdate).getTime(),new Date(form.value.leaveenddate).getTime());
@@ -111,7 +107,6 @@ left:number;
           this.applyleave.leaveenddate=form.value.leaveenddate;
           this.service.createEmployeeLeave(this.applyleave).subscribe( res =>{
             alert(`Leave Added Successfully`);
-            this.lid=res.id;
             this.onSaveComplete();
           },
           err=>{
