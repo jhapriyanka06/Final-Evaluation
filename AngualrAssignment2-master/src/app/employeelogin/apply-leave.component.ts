@@ -6,6 +6,7 @@ import { EmployeeService } from '../shared/employee.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import {NgForm} from '@angular/forms';
 import { ApplyLeaveService } from '../shared/apply-leave.service';
+import { Employee } from '../shared/employee.model';
 
 @Component({
   selector:'apply-leave',
@@ -23,6 +24,9 @@ export class ApplyLeaveComponent implements OnInit {
   leaves_t:Leave;
   empId:number;
   lid:number;
+  employee:Employee;
+  employees:Employee[];
+  employeedetails:Employee[]=[];
   leavemappingdetails:EmployeeLeaveMapping[]=[];
   leavemapping:EmployeeLeaveMapping[];
   constructor(private service:LeaveService,private services:EmployeeService,
@@ -34,6 +38,12 @@ export class ApplyLeaveComponent implements OnInit {
     const ID=+this.route.snapshot.paramMap.get('id');
     this.applyleave.employeeid=ID;
     this.empId=ID;
+    this.services.getEmployees().subscribe({
+      next: employee => {
+        this.employees= employee;
+        this.employeedetails = this.employees;
+      },
+     });
     this.service.getLeaves().subscribe({
     next: leave => {
       this.leave = leave;
@@ -67,6 +77,9 @@ left:number;
             console.log(err);
           }
           )
+        }
+        else if(this.days<0){
+          alert(`give a valid end date`);
         }
         else if(this.leaves.maximumleavesallowed=='0'){
           alert(`You Cannot Apply For Any More ${form.value.leavename}`);
@@ -106,6 +119,10 @@ left:number;
           }
           )
         }
+        else if(this.days<0){
+          alert(`give a valid end date`);
+          alert(`please refresh the page before applying for another leave`);
+        }
         else if(this.leaves.maximumleavesallowed=='0'){
           alert(`You Cannot Apply For Any More ${form.value.leavename}`);
           alert(`please refresh the page before applying for another leave`);
@@ -141,4 +158,5 @@ private initialize():Leave{
 onSaveComplete(message?: string): void {
   this.router.navigate(['/employeeleavelist',this.empId]);
 }
+
 }
